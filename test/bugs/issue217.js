@@ -12,7 +12,6 @@ describe("issue217 ", function () {
     });
 
     it("send tx until gw-web3-indexer exitd(1) ", async () => {
-        //
 
         ethers.provider.on('debug', (info) => {
             console.log("begin ------------------")

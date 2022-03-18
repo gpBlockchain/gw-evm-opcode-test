@@ -7,8 +7,9 @@ You can deploy in the localhost network following these steps:
 ```sh
 # see: https://github.com/RetricSu/godwoken-kicker/tree/compatibility-changes
 git clone -b compatibility-changes --depth=1 https://github.com/RetricSu/godwoken-kicker.git kicker
-cd kicker
-make start
+cd kicker 
+./kicker start 
+./kicker deposit config/private_key 1000
 ```
 
 
