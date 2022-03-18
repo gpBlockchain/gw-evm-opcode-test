@@ -12,4 +12,7 @@ contract EcrecoverContract {
         return keccak256("ABC");
     }
 
+    function callKeccak2562() public returns(bytes32 result){
+        return keccak256("ABC");
+    }
 }
