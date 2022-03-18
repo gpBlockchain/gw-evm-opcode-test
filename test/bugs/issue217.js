@@ -1,7 +1,7 @@
 const {ethers} = require("hardhat");
 
 
-describe("issue217 ", function () {
+describe.only("issue217 ", function () {
 
     let contract;
     let blockInfoContract;
