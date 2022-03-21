@@ -30,7 +30,7 @@ contract CallContractTest{
 
     }
 
-    function testCall(address  addrs,bytes memory invokeSigns,bytes memory expected) public returns(bool){
+    function testCall(address  addrs,bytes memory invokeSigns,bytes memory expected) public  returns(bool){
 
         emit hashResult(addrs,invokeSigns);
         (bool success, bytes memory returnData) = addrs.call(invokeSigns);
