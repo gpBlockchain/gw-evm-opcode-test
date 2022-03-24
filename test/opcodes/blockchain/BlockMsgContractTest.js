@@ -17,7 +17,6 @@ describe("opcode -blockchain -block ", function () {
     it("block -blockMsgContract blockhash",async ()=>{
         let tx  =await contract.getBlockHashEventTopre256()
         let receipt = await tx.wait()
-        console.log("----")
         for (let i = 0; i < receipt.events.length; i++) {
             if (i<2 || i>=258 ){
                 expect(receipt.events[i].args[0]).to.be.equal("0x0000000000000000000000000000000000000000000000000000000000000000");

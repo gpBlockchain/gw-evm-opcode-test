@@ -6,11 +6,10 @@ describe("opcode -sha256 ", function () {
 
     let contract;
 
-    beforeEach(async function () {
+    before(async function () {
         const blockInfoContract = await ethers.getContractFactory("sha256Contract");
         contract = await blockInfoContract.deploy();
         await contract.deployed();
-        console.log("contractAddress:", contract.address);
     });
     it("opKeccak256 - args", async () => {
         await invokeKeccak256("", "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470")
@@ -20,8 +19,6 @@ describe("opcode -sha256 ", function () {
     })
 
     async function invokeKeccak256(keccakData, hash) {
-        console.log("keccakData:", keccakData)
-        console.log("hash:", hash)
         let result = await contract.opKeccak256(keccakData);
         expect(result).to.be.equal(hash);
         let callResult = await contract.opKeccak256(keccakData);
