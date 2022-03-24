@@ -48,5 +48,16 @@ jobs:
           key: ${{ runner.os }}-node_modules-${{ hashFiles('/home/runner/work/**/package-lock.json', '/home/runner/work/**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
+      - name: Start Godwoken-Kicker
+      uses: actions/checkout@v2
+        - run: git clone -b compatibility-changes https://github.com/RetricSu/godwoken-kicker.git
+          working-directory: godwoken/
+        - run: ./kicker init
+          working-directory: godwoken/
+        - run: ./kicker start
+          working-directory: godwoken/
+        - run:./kicker info
+          working-directory: godwoken/
+        - run: sleep 120
       - name: Run tests
         run: npm install ; npm run test
