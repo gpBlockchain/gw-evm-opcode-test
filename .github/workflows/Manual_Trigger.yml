@@ -43,15 +43,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Part 1. Deploy Local Network of Godwoken"
-      - name: Clone source code
-        run: |
-          git clone -b compatibility-changes https://github.com/RetricSu/godwoken-kicker.git
-          cd godwoken-kicker
-          ./kicker init
-          ./kicker start
-          ./kicker info
-          ./kicker ps
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -69,5 +60,15 @@ jobs:
           key: ${{ runner.os }}-node_modules-${{ hashFiles('/home/runner/work/**/package-lock.json', '/home/runner/work/**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
+      - run: echo "Part 2. Deploy Local Network of Godwoken"
+      - name: Clone source code
+        run: |
+          git clone -b compatibility-changes https://github.com/RetricSu/godwoken-kicker.git
+          cd godwoken-kicker
+          ./kicker init
+          ./kicker start
+          ./kicker info
+          ./kicker ps
+          cd ../
       - name: Run tests
         run: npm install ; npm run test
