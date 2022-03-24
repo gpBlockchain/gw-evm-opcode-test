@@ -22,8 +22,26 @@ on:
 
 
 jobs:
-  start-godwoken:
+#  start-godwoken:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - run: echo "Part 1. Deploy Local Network of Godwoken"
+#      - name: Clone source code
+#        run: |
+#          git clone -b compatibility-changes https://github.com/RetricSu/godwoken-kicker.git
+#          cd godwoken-kicker
+#          ./kicker init
+#          ./kicker start
+#          ./kicker info
+#          ./kicker ps
+
+  contract-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        net: ['testnet_v1']
     runs-on: ubuntu-latest
+
     steps:
       - run: echo "Part 1. Deploy Local Network of Godwoken"
       - name: Clone source code
@@ -34,16 +52,6 @@ jobs:
           ./kicker start
           ./kicker info
           ./kicker ps
-
-  contract-tests:
-    needs: start-godwoken
-    strategy:
-      fail-fast: false
-      matrix:
-        net: ['testnet_v1']
-    runs-on: ubuntu-latest
-
-    steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
