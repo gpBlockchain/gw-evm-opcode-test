@@ -19,7 +19,7 @@ describe("opcode_code.js opcode -code ", function () {
         let result = await contract.ass(33,4,32);
         expect(result[1].length).to.be.equal(81922)
         expect(result[0].length).to.be.equal(130)
-    }).timeout(10000000000);
+    });
 
     it("code store", async () => {
         try {
