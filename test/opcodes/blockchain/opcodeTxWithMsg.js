@@ -2,7 +2,7 @@ const {ethers} = require("hardhat");
 const {expect} = require("chai");
 
 
-describe("opcode -tx msg ", function () {
+describe("opcodeTxWithMsg.js opcode -tx msg ", function () {
 
     let contractWithValue;
     let contract2NoValue;

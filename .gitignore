@@ -4,3 +4,4 @@
 .idea
 hardhat.config.js
 package-lock.json
+test-results.json

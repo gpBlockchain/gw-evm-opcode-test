@@ -1,7 +1,7 @@
 const {ethers} = require("hardhat");
 const {expect} = require("chai");
 
-describe("opcode -sha256 ", function () {
+describe("sha256Contract.js opcode -sha256 ", function () {
 
 
     let contract;

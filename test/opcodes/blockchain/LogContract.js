@@ -1,7 +1,7 @@
 const {ethers} = require("hardhat");
 const {expect} = require("chai");
 
-describe("opcode -log ", function () {
+describe("LogContract.js opcode -log ", function () {
 
     let contract;
 

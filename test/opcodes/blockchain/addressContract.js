@@ -1,7 +1,7 @@
 const {ethers} = require("hardhat");
 const {expect} = require("chai");
 
-describe("opcode -address(address(this),address(this).balance,address(this).code,address(this).code.length,address(this).codehash) ", function () {
+describe("addressContract.js opcode -address(address(this),address(this).balance,address(this).code,address(this).code.length,address(this).codehash) ", function () {
 
 
     let contract;
@@ -31,7 +31,7 @@ describe("opcode -address(address(this),address(this).balance,address(this).code
         expect(result[0]).to.be.equal(contract.address)
         expect(result[1]).to.be.equal(10000n)
         expect(result[2]).to.be.equal(code)
-        expect(result[4]).to.be.equal("0x01d677c22a90c39d2c2cdbe7e053ab2c7e08693885eda906c29a26ac5a6bb5d2");
+        expect(result[4]).to.be.equal("0xc5a94d21b524783a20d29f69f58fb1e79791dd9145c027947fdb87fbb1e25826");
 
     })
     it("opcode -  (ADDRESS,CODESIZE,EXTCODESIZE,SELFBALANCE) query on deploy", async () => {
@@ -41,7 +41,7 @@ describe("opcode -address(address(this),address(this).balance,address(this).code
         expect(result.events[0].args[1].latestAddress).to.be.equal(contract.address)
         expect(result.events[0].args[1].latestCode).to.not.be.contains("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
         expect(result.events[0].args[1].latestCodeLength).to.be.equal(3441n)
-        expect(result.events[0].args[1].latestCodeHash).to.be.equal("0x01d677c22a90c39d2c2cdbe7e053ab2c7e08693885eda906c29a26ac5a6bb5d2")
+        expect(result.events[0].args[1].latestCodeHash).to.be.equal("0xc5a94d21b524783a20d29f69f58fb1e79791dd9145c027947fdb87fbb1e25826")
 
     });
 

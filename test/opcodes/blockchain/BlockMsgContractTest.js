@@ -2,7 +2,7 @@ const {ethers} = require("hardhat");
 const {expect} = require("chai");
 
 //todo 考虑集成到ci
-describe("opcode -blockchain -block ", function () {
+describe("BlockMsgContractTest.js opcode -blockchain -block ", function () {
 
 
     let contract;

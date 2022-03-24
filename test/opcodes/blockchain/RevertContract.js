@@ -2,7 +2,7 @@ const {ethers} = require("hardhat");
 const {expect} = require("chai");
 
 
-describe("opcode ", function () {
+describe("RevertContract.js opcode ", function () {
 
 
     let contract;
