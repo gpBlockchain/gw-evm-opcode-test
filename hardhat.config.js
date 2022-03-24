@@ -58,4 +58,14 @@ module.exports = {
 
     ], overrides: {}
   },
+  mocha:{
+    /** Reporter name or constructor. */
+    reporter: "json",
+
+    /** Reporter settings object. */
+    reporterOptions: {
+      output:"test-results.json"
+    },
+
+  }
 };
