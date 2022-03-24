@@ -69,6 +69,10 @@ jobs:
           ./kicker start
           ./kicker info
           ./kicker ps
+          ./kicker ps web3
+          ./kicker logs
+          ./kicker logs web3
+          ./kicker deposit 0xCD1d13450cFA630728D0390C99957C6948BF7d19 1000
           cd ../
           curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
 
