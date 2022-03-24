@@ -71,4 +71,11 @@ jobs:
           ./kicker ps
           cd ../
       - name: Run tests
-        run: npm install ; npm run test
+        run: npm install ; npm run test  
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    
+        with:
+          name: mocha Tests            
+          path: test-results.json    
+          reporter: mocha-json  
