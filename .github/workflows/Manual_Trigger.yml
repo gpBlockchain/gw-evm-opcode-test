@@ -62,7 +62,7 @@ jobs:
         run: |
          echo "GitUrlForKit level: ${{ github.event.inputs.GitUrlForKit }}"
          echo "GitBranchForKit: ${{ github.event.inputs.GitBranchForKit }}"
-         echo "TestScript: ${{ toJson(github.event.TestScript) }}"
+         echo "TestScript: ${{ github.event.TestScript }}"
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
