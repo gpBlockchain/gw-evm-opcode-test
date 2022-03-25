@@ -61,6 +61,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
       - run: echo "Part 2. Deploy Local Network of Godwoken"
+      - name: Run tests
+        run: |
+          npm install
+          npm run test
+      - name: Publishing Allure artifact to GitHub Actions
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-report
+          path: allure-results
+#      - name: Test Report
+#        uses: dorny/test-reporter@v1
+#        if: success() || failure()
+#        with:
+#          name: mocha Tests
+#          path: test-results.json
+#          reporter: mocha-json
+
 #      - name: Clone source code
 #        run: |
 #          cd ../
@@ -77,21 +94,3 @@ jobs:
 #          cd ../
 #          cd gw-evm-opcode-test
 #          curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
-
-      - name: Run tests
-        run: |
-#          curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
-          npm install
-          npm run test
-      - name: Publishing Allure artifact to GitHub Actions
-        uses: actions/upload-artifact@v2
-        with:
-          name: allure-report
-          path: allure-results
-#      - name: Test Report
-#        uses: dorny/test-reporter@v1
-#        if: success() || failure()
-#        with:
-#          name: mocha Tests
-#          path: test-results.json
-#          reporter: mocha-json
