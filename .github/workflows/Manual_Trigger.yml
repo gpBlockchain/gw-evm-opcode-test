@@ -95,6 +95,7 @@ jobs:
           cd gw-evm-opcode-test
           curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
       - name: Run tests
+        id: runtest
         run: |
           npm install
           npm run ${{ github.event.inputs.TestScript }}
