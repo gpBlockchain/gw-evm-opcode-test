@@ -80,7 +80,7 @@ jobs:
 
       - name: Run tests
         run: |
-          curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
+#          curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
           npm install
           npm run test
       - name: Publishing Allure artifact to GitHub Actions
