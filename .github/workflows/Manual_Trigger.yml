@@ -21,14 +21,14 @@ on:
 #      tags:
 #        description: 'Test scenario tags'
 #
-jobs:
- printInputs:
-   runs-on: ubuntu-latest
-   steps:
-     - run: |
-         echo "GitUrlForKit level: ${{ github.event.inputs.GitUrlForKit }}"
-         echo "GitBranchForKit: ${{ github.event.inputs.GitBranchForKit }}"
-         echo "TestScript: ${{ toJson(github.event.TestScript) }}"
+# jobs:
+#  printInputs:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - run: |
+#          echo "GitUrlForKit level: ${{ github.event.inputs.GitUrlForKit }}"
+#          echo "GitBranchForKit: ${{ github.event.inputs.GitBranchForKit }}"
+#          echo "TestScript: ${{ toJson(github.event.TestScript) }}"
 
 
 jobs:
@@ -57,6 +57,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+      - name: printMsg
+        run: |
+         echo "GitUrlForKit level: ${{ github.event.inputs.GitUrlForKit }}"
+         echo "GitBranchForKit: ${{ github.event.inputs.GitBranchForKit }}"
+         echo "TestScript: ${{ toJson(github.event.TestScript) }}"
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
