@@ -5,7 +5,8 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
-    "test:gw_testnet_v1": "hardhat test --network gw_testnet_v1"
+    "test:gw_testnet_v1": "hardhat test --network gw_testnet_v1",
+    "test:bsc_test": "hardhat test --network bsc_test"
   },
   "keywords": [
     "Solidity",
@@ -23,8 +24,5 @@
     "ethers": "^5.4.1",
     "hardhat": "^2.9.1",
     "web3": "^1.7.1"
-  },
-  "dependencies": {
-    "mocha-allure-reporter": "^1.4.0"
   }
 }

@@ -1,8 +1,7 @@
 const {ethers} = require("hardhat");
 const {expect} = require("chai");
-require("mocha-allure-reporter");
 //todo 考虑集成到ci
-describe.only("BlockMsgContractTest.js opcode -blockchain -block ", function () {
+describe("BlockMsgContractTest.js opcode -blockchain -block ", function () {
 
 
     let contract;
@@ -15,27 +14,17 @@ describe.only("BlockMsgContractTest.js opcode -blockchain -block ", function () 
     });
 
     it("block -blockMsgContract blockhash", async () => {
-        allure.description(
-            "this test should be **failed** for example purposes",
-            "markdown"
-        );
-        let tx;
-        let receipt;
-        await allure.createStep("invoke getBlockHashEventTopre256", async () => {
-            tx = await contract.getBlockHashEventTopre256()
-            receipt = await tx.wait()
-        })();
 
-        allure.createStep("query blockhash  ", async () => {
-            for (let i = 0; i < receipt.events.length; i++) {
-                if (i < 2 || i >= 258) {
-                    expect(receipt.events[i].args[0]).to.be.equal("0x0000000000000000000000000000000000000000000000000000000000000000");
-                } else {
-                    expect(receipt.events[i].args[0]).to.be.not.equal("0x0000000000000000000000000000000000000000000000000000000000000000");
-                }
+        let tx = await contract.getBlockHashEventTopre256()
+        let receipt = await tx.wait()
+
+        for (let i = 0; i < receipt.events.length; i++) {
+            if (i < 2 || i >= 258) {
+                expect(receipt.events[i].args[0]).to.be.equal("0x0000000000000000000000000000000000000000000000000000000000000000");
+            } else {
+                expect(receipt.events[i].args[0]).to.be.not.equal("0x0000000000000000000000000000000000000000000000000000000000000000");
             }
-        })();
-
+        }
 
     })
 

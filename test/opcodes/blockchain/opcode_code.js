@@ -26,7 +26,7 @@ describe("opcode_code.js opcode -code ", function () {
             let tx = await contract.storeData(33,4,32);
             await tx.wait();
         }catch (error) {
-            expect(error.toString()).to.be.contains("out of gas")
+            expect(error.toString()).to.be.contains("gas")
         }
         let ab = await  contract.getAB();
         expect(ab[0]).to.be.equal("0x")

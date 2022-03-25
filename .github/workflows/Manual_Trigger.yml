@@ -3,6 +3,16 @@ name: Manual Trigger
 on:
   # 手动触发事件
   workflow_dispatch:
+    inputs:
+      GitUrlForKit:
+        description: 'godwoken-kit -git url'
+        default: 'https://github.com/RetricSu/godwoken-kicker.git'
+      GitBranchForKit:
+        description: 'godwoken-kit -git branch'
+        default: 'compatibility-changes'
+      TestScript:
+        description: 'exec test case:1.test 2:test:gw_testnet_v1 3:test:bsc_test''
+        default: 'test:gw_testnet_v1'
 #    inputs:
 #      logLevel:
 #        description: 'Log level'
@@ -22,18 +32,18 @@ on:
 
 
 jobs:
-#  start-godwoken:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - run: echo "Part 1. Deploy Local Network of Godwoken"
-#      - name: Clone source code
-#        run: |
-#          git clone -b compatibility-changes https://github.com/RetricSu/godwoken-kicker.git
-#          cd godwoken-kicker
-#          ./kicker init
-#          ./kicker start
-#          ./kicker info
-#          ./kicker ps
+  #  start-godwoken:
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - run: echo "Part 1. Deploy Local Network of Godwoken"
+  #      - name: Clone source code
+  #        run: |
+  #          git clone -b compatibility-changes https://github.com/RetricSu/godwoken-kicker.git
+  #          cd godwoken-kicker
+  #          ./kicker init
+  #          ./kicker start
+  #          ./kicker info
+  #          ./kicker ps
 
   contract-tests:
     strategy:
@@ -61,36 +71,30 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
       - run: echo "Part 2. Deploy Local Network of Godwoken"
+      - name: Clone source code
+        run: |
+          cd ../
+          git clone -b ${{ github.event.inputs.GitBranchForKit }} ${{ github.event.inputs.GitUrlForKit }}
+          cd godwoken-kicker
+          ./kicker init
+          ./kicker start
+          ./kicker info
+          ./kicker ps
+          ./kicker ps web3
+          ./kicker logs
+          ./kicker logs web3
+          ./kicker deposit 0xCD1d13450cFA630728D0390C99957C6948BF7d19 1000
+          cd ../
+          cd gw-evm-opcode-test
+          curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
       - name: Run tests
         run: |
           npm install
-          npm run test
-      - name: Publishing Allure artifact to GitHub Actions
-        uses: actions/upload-artifact@v2
+          npm run ${{ github.event.inputs.TestScript }}
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
         with:
-          name: allure-report
-          path: allure-results
-#      - name: Test Report
-#        uses: dorny/test-reporter@v1
-#        if: success() || failure()
-#        with:
-#          name: mocha Tests
-#          path: test-results.json
-#          reporter: mocha-json
-
-#      - name: Clone source code
-#        run: |
-#          cd ../
-#          git clone -b compatibility-changes https://github.com/RetricSu/godwoken-kicker.git
-#          cd godwoken-kicker
-#          ./kicker init
-#          ./kicker start
-#          ./kicker info
-#          ./kicker ps
-#          ./kicker ps web3
-#          ./kicker logs
-#          ./kicker logs web3
-#          ./kicker deposit 0xCD1d13450cFA630728D0390C99957C6948BF7d19 1000
-#          cd ../
-#          cd gw-evm-opcode-test
-#          curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
+          name: mocha Tests
+          path: test-results.json
+          reporter: mocha-json
