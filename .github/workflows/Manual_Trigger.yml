@@ -10,6 +10,9 @@ on:
       GitBranchForKit:
         description: 'godwoken-kit -git branch'
         default: 'compatibility-changes'
+      StartGodwoken:
+        description: 'start godken'
+        default: 'true'
       TestScript:
         description: 'exec test case:1.test 2:test:gw_testnet_v1 3:test:bsc_test'
         default: 'test:gw_testnet_v1'
@@ -63,7 +66,8 @@ jobs:
          echo "GitUrlForKit level: ${{ github.event.inputs.GitUrlForKit }}"
          echo "GitBranchForKit: ${{ github.event.inputs.GitBranchForKit }}"
          echo "TestScript: ${{ github.event.TestScript }}"
-
+         echo "StartGodwoken: ${{ github.event.StartGodwoken }}"
+        
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -80,18 +84,20 @@ jobs:
       - run: echo "Part 2. Deploy Local Network of Godwoken"
       - name: Clone source code
         run: |
-          git clone -b ${{ github.event.inputs.GitBranchForKit }} ${{ github.event.inputs.GitUrlForKit }}
-          cd godwoken-kicker
-          ./kicker init
-          ./kicker start
-          ./kicker info
-          ./kicker ps
-          ./kicker ps web3
-          ./kicker logs
-          ./kicker logs web3
-          ./kicker deposit 0xCD1d13450cFA630728D0390C99957C6948BF7d19 1000
-          cd ../
-          curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
+          if [ ${{ github.event.StartGodwoken }} == "true" ];then
+            git clone -b ${{ github.event.inputs.GitBranchForKit }} ${{ github.event.inputs.GitUrlForKit }}
+            cd godwoken-kicker
+            ./kicker init
+            ./kicker start
+            ./kicker info
+            ./kicker ps
+            ./kicker ps web3
+            ./kicker logs
+            ./kicker logs web3
+            ./kicker deposit 0xCD1d13450cFA630728D0390C99957C6948BF7d19 1000
+            cd ../
+            curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
+          fi
       - name: Run tests
         id: runtest
         run: |
