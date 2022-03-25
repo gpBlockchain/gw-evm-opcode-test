@@ -71,12 +71,12 @@ module.exports = {
   },
   mocha:{
     /** Reporter name or constructor. */
-    reporter: "mocha-allure-reporter",
+    reporter: "json",
 
     /** Reporter settings object. */
-    // reporterOptions: {
-    //   output:"test-results.html"
-    // },
+    reporterOptions: {
+      output:"test-results.json"
+    },
 
   }
 };
