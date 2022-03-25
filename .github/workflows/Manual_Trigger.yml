@@ -21,14 +21,14 @@ on:
 #      tags:
 #        description: 'Test scenario tags'
 #
-#jobs:
-#  printInputs:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - run: |
-#          echo "Log level: ${{ github.event.inputs.logLevel }}"
-#          echo "Tags: ${{ github.event.inputs.tags }}"
-#          echo "Inputs: ${{ toJson(github.event.inputs) }}"
+jobs:
+ printInputs:
+   runs-on: ubuntu-latest
+   steps:
+     - run: |
+         echo "GitUrlForKit level: ${{ github.event.inputs.GitUrlForKit }}"
+         echo "GitBranchForKit: ${{ github.event.inputs.GitBranchForKit }}"
+         echo "TestScript: ${{ toJson(github.event.TestScript) }}"
 
 
 jobs:
