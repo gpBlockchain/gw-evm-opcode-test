@@ -11,7 +11,7 @@ on:
         description: 'godwoken-kit -git branch'
         default: 'compatibility-changes'
       TestScript:
-        description: 'exec test case:1.test 2:test:gw_testnet_v1 3:test:bsc_test''
+        description: 'exec test case:1.test 2:test:gw_testnet_v1 3:test:bsc_test'
         default: 'test:gw_testnet_v1'
 #    inputs:
 #      logLevel:
