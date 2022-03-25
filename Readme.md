@@ -144,5 +144,8 @@ select issue250 branches
 ![img_6.png](img/img_6.png)
 ![img_7.png](img/img_7.png)
 ![img_8.png](img/img_8.png)
-####If the report is not found at the end of the execution, you can go to the Test Report directory to find the url of the report![img_9.png](img/img_9.png)
+
+#### If the report is not found at the end of the execution, you can go to the Test Report directory to find the url of the report
+
+![img_9.png](img/img_9.png)
 ![img_10.png](img/img_10.png)
