@@ -10,6 +10,9 @@ on:
       GitBranchForKit:
         description: 'godwoken-kit -git branch'
         default: 'compatibility-changes'
+      StartGodwoken:
+        description: 'start godwoken'
+        default: 'true'
       TestScript:
         description: 'exec test case:1.test 2:test:gw_testnet_v1 3:test:bsc_test'
         default: 'test:gw_testnet_v1'
@@ -21,14 +24,14 @@ on:
 #      tags:
 #        description: 'Test scenario tags'
 #
-#jobs:
+# jobs:
 #  printInputs:
 #    runs-on: ubuntu-latest
 #    steps:
 #      - run: |
-#          echo "Log level: ${{ github.event.inputs.logLevel }}"
-#          echo "Tags: ${{ github.event.inputs.tags }}"
-#          echo "Inputs: ${{ toJson(github.event.inputs) }}"
+#          echo "GitUrlForKit level: ${{ github.event.inputs.GitUrlForKit }}"
+#          echo "GitBranchForKit: ${{ github.event.inputs.GitBranchForKit }}"
+#          echo "TestScript: ${{ toJson(github.event.TestScript) }}"
 
 
 jobs:
@@ -57,6 +60,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+      - name: printInputs
+        id: printInputs
+        run: |
+         echo "GitUrlForKit level: ${{ github.event.inputs.GitUrlForKit }}"
+         echo "GitBranchForKit: ${{ github.event.inputs.GitBranchForKit }}"
+         echo "TestScript: ${{ github.event.inputs.TestScript }}"
+         echo "StartGodwoken: ${{ github.event.inputs.StartGodwoken }}"
+        
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -73,21 +84,22 @@ jobs:
       - run: echo "Part 2. Deploy Local Network of Godwoken"
       - name: Clone source code
         run: |
-          cd ../
-          git clone -b ${{ github.event.inputs.GitBranchForKit }} ${{ github.event.inputs.GitUrlForKit }}
-          cd godwoken-kicker
-          ./kicker init
-          ./kicker start
-          ./kicker info
-          ./kicker ps
-          ./kicker ps web3
-          ./kicker logs
-          ./kicker logs web3
-          ./kicker deposit 0xCD1d13450cFA630728D0390C99957C6948BF7d19 1000
-          cd ../
-          cd gw-evm-opcode-test
-          curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
+          if [ ${{ github.event.inputs.StartGodwoken }} == "true" ];then
+            git clone -b ${{ github.event.inputs.GitBranchForKit }} ${{ github.event.inputs.GitUrlForKit }}
+            cd godwoken-kicker
+            ./kicker init
+            ./kicker start
+            ./kicker info
+            ./kicker ps
+            ./kicker ps web3
+            ./kicker logs
+            ./kicker logs web3
+            ./kicker deposit 0xCD1d13450cFA630728D0390C99957C6948BF7d19 1000
+            cd ../
+            curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
+          fi
       - name: Run tests
+        id: runtest
         run: |
           npm install
           npm run ${{ github.event.inputs.TestScript }}
