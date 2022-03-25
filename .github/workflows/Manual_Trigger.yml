@@ -83,10 +83,15 @@ jobs:
           curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
           npm install
           npm run test
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()    
+      - name: Publishing Allure artifact to GitHub Actions
+        uses: actions/upload-artifact@v2
         with:
-          name: mocha Tests            
-          path: test-results.json    
-          reporter: mocha-json  
+          name: allure-report
+          path: allure-results
+#      - name: Test Report
+#        uses: dorny/test-reporter@v1
+#        if: success() || failure()
+#        with:
+#          name: mocha Tests
+#          path: test-results.json
+#          reporter: mocha-json
