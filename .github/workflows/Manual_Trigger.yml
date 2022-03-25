@@ -63,6 +63,7 @@ jobs:
       - run: echo "Part 2. Deploy Local Network of Godwoken"
       - name: Clone source code
         run: |
+          cd ../
           git clone -b compatibility-changes https://github.com/RetricSu/godwoken-kicker.git
           cd godwoken-kicker
           ./kicker init
@@ -74,6 +75,7 @@ jobs:
           ./kicker logs web3
           ./kicker deposit 0xCD1d13450cFA630728D0390C99957C6948BF7d19 1000
           cd ../
+          cd gw-evm-opcode-test
           curl http://localhost:8024 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
 
       - name: Run tests
