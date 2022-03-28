@@ -15,6 +15,7 @@ describe.only("issue232.js", function () {
 
     it.only("issue232", async () => {
         let result  = await contract.iss232Test();
+        console.log("invoke add(33,4,32)")
         console.log("result",result)
         console.log("a:",result[0])
         console.log("b:",result[1])
