@@ -3,13 +3,13 @@ const {expect} = require("chai");
 //https://github.com/nervosnetwork/godwoken-web3/issues/242
 
 
-describe.only("CrossCallTest.js cross call ", function () {
+describe("CrossCallTest.js cross call ", function () {
     let crossContract
 
     before(async function () {
     });
 
-    it.only("deploy contract failed ", async () => {
+    it("deploy contract failed ", async () => {
         const blockInfoContract = await ethers.getContractFactory("CrossCallBugTest");
         crossContract = await blockInfoContract.deploy();
         console.log("deployTransaction tx hash:",crossContract.deployTransaction)
