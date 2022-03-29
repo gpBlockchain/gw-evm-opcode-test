@@ -21,14 +21,14 @@ describe.only("issue241.js cross call ", function () {
         let tx = await crossContract.call_stack(2)
         let receipt = await tx.wait();
         console.log("receipt:", receipt)
-    }).timeout(10000000)
+    })
 
     it("call  call_stack(3)", async () => {
         console.log("================")
         let tx = await crossContract.call_stack(3)
         let receipt = await tx.wait();
         console.log("receipt:", receipt)
-    }).timeout(10000000)
+    })
 
     it("call  call_stack(5)", async () => {
         console.log("--------------")
@@ -37,14 +37,14 @@ describe.only("issue241.js cross call ", function () {
         let receipt = await tx.wait();
         console.log("receipt:", receipt)
 
-    }).timeout(10000000)
+    })
 
     it("call  call_stack(100)", async () => {
         let tx = await crossContract.call_stack(100)
         let receipt = await tx.wait();
         console.log("receipt:", receipt)
 
-    }).timeout(10000000)
+    })
 
 
 })
