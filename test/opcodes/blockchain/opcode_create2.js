@@ -1,7 +1,7 @@
 const {ethers} = require("hardhat");
 const {expect} = require("chai");
 //todo 考虑集成到ci
-describe.only("create2_test.js ", function () {
+describe("create2_test.js ", function () {
 
 
     let contract;
