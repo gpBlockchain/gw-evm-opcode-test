@@ -10,6 +10,8 @@ git clone -b compatibility-changes --depth=1 https://github.com/RetricSu/godwoke
 cd kicker
 ./kicker init
 ./kicker start
+./kicker deposit 0xCD1d13450cFA630728D0390C99957C6948BF7d19 1000
+./kicker deposit 0x0c1efcca2bcb65a532274f3ef24c044ef4ab6d73 1000
 ```
 
 
