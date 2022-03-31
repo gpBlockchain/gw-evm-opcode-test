@@ -5,8 +5,8 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
-    "test:gw_devnet_v1": "hardhat test --network gw_devnet_v1",
     "test:gw_testnet_v1": "hardhat test --network gw_testnet_v1",
+    "test:gw_local_kit_net_v1": "hardhat test --network gw_local_kit_net_v1",
     "test:bsc_test": "hardhat test --network bsc_test"
   },
   "keywords": [
