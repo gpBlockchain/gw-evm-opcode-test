@@ -15,7 +15,7 @@ describe.only("blockhash_bug ", function () {
 
     });
 
-    it("Failed to get Contract Code", async () => {
+    it.only("Failed to get Contract Code", async () => {
         let blockInfoContract = await ethers.getContractFactory("addressContract");
         contract = await blockInfoContract.deploy();//{value: 10n}
         await contract.deployed();
