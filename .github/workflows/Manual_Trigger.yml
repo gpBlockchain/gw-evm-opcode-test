@@ -67,7 +67,6 @@ jobs:
           echo "GitBranchForKit: ${{ github.event.inputs.GitBranchForKit }}"
           echo "TestScript: ${{ github.event.inputs.TestScript }}"
           echo "StartGodwoken: ${{ github.event.inputs.StartGodwoken }}"
-
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
