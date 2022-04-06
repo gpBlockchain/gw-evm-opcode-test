@@ -20,14 +20,13 @@ module.exports = {
     },
     bsc_test:{
       url:`https://data-seed-prebsc-1-s1.binance.org:8545/`,
-      accounts:[`0xdd50cac37ec6dd12539a968c1a2cbedda75bd8724f7bcad486548eaabb87fc8b`]
+      accounts: [`0x${PRIVATE_KEY}`, `0x${PRIVATE_KEY2}`],
     },
-
-    gw_devnet_v1: {
+    gw_local_kit_net_v1 : {
       url: `http://127.0.0.1:8024`,
-      accounts: [`0xdd50cac37ec6dd12539a968c1a2cbedda75bd8724f7bcad486548eaabb87fc8b`, `0x6cd5e7be2f6504aa5ae7c0c04178d8f47b7cfc63b71d95d9e6282f5b090431bf`],
+      accounts: [`0x${PRIVATE_KEY}`, `0x${PRIVATE_KEY2}`],
     },
-    gw_testnet_v1: {
+    gw_testnet_v1 : {
       url: `https://godwoken-testnet-web3-v1-rpc.ckbapp.dev`,
       accounts: [`0x${PRIVATE_KEY}`, `0x${PRIVATE_KEY2}`],
     },
@@ -61,6 +60,7 @@ module.exports = {
         version: "0.6.6",
         settings: {}
       },
+      {version:"0.4.24"},
       {version:"0.5.14"},
       { version: "0.6.12" },
       { version: "0.7.5" },
@@ -71,12 +71,12 @@ module.exports = {
   },
   mocha:{
     /** Reporter name or constructor. */
-    reporter: "json",
+    // reporter: "json",
 
     /** Reporter settings object. */
-    reporterOptions: {
-      output:"test-results.json"
-    },
+    // reporterOptions: {
+    //   output:"test-results.json"
+    // },
 
   }
 };
