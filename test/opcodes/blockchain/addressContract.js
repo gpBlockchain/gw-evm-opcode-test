@@ -14,6 +14,7 @@ describe("addressContract.js opcode -address(address(this),address(this).balance
         await contract.deployed();
         contract2 = await blockInfoContract.deploy({value: 101n});
         await contract2.deployed();
+
     });
 
     it("opcode - (query log for deploy)", async () => {
